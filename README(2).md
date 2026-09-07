@@ -392,6 +392,110 @@ Kubernetes DNS names instead of directly addressing pod IPs.
 
 ------------------------------------------------------------------------
 
+------------------------------------------------------------------------
+
+## 🔄 CI/CD Pipeline
+
+The project includes **Jenkinsfiles** for automating the application
+build, containerization, image publishing, and Kubernetes deployment
+workflow.
+
+The CI/CD flow is:
+
+``` text
+Developer
+    │
+    ▼
+  GitHub
+    │
+    │ Webhook / Build Trigger
+    ▼
+ Jenkins
+    │
+    ├── Checkout Source
+    │
+    ├── Build & Test
+    │
+    ├── Docker Build
+    │
+    ├── Docker Image Tag
+    │
+    ├── Push Image to Container Registry
+    │
+    └── Deploy / Rollout to Kubernetes
+             │
+             ▼
+       kind Kubernetes Cluster
+             │
+             ├── API Gateway
+             ├── Chat Service
+             └── Ollama
+```
+
+### Jenkins Responsibilities
+
+Jenkins automates the application delivery process:
+
+-   Checkout source code from GitHub
+-   Build application components
+-   Run application checks/tests where configured
+-   Build Docker images
+-   Tag container images
+-   Push images to the configured container registry
+-   Deploy updated workloads to Kubernetes
+-   Monitor Kubernetes rollout status
+
+### Jenkinsfiles
+
+Pipeline definitions are maintained as code using Jenkinsfiles.
+
+Example repository structure:
+
+``` text
+.
+├── Jenkinsfile
+├── Jenkinsfile.api-gateway
+├── Jenkinsfile.chat-service
+├── Jenkinsfile.frontend
+└── ...
+```
+
+> Update the Jenkinsfile names above to match the exact files in the
+> repository.
+
+Using Jenkinsfiles keeps CI/CD pipeline configuration version-controlled
+alongside the application source code.
+
+### Deployment Flow
+
+``` text
+Git Push
+   │
+   ▼
+Jenkins Pipeline
+   │
+   ├── Checkout
+   ├── Build
+   ├── Test
+   ├── Docker Build
+   └── Docker Push
+            │
+            ▼
+     Container Registry
+            │
+            ▼
+      Kubernetes Update
+            │
+            ▼
+    Rolling Deployment
+            │
+            ▼
+      Updated Pods
+```
+
+This provides an automated path from source-code changes to a Kubernetes
+deployment.
+
 ## 🚀 Kubernetes Deployment
 
 ### Create Namespace
@@ -669,6 +773,11 @@ while public-facing networking components are placed in public subnets.
 │       ├── service.yml
 │       └── statefulset.yml
 │
+├── Jenkinsfile
+├── Jenkinsfile.api-gateway
+├── Jenkinsfile.chat-service
+├── Jenkinsfile.frontend
+│
 ├── terraform/
 │   ├── vpc/
 │   ├── ec2/
@@ -863,7 +972,7 @@ Add the diagrams to the README using:
 
 ------------------------------------------------------------------------
 
-## 👤 Dev
+## 👤 Developer
 
 **Vaibhav Umbarkar**
 
