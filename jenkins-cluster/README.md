@@ -159,7 +159,7 @@ This project demonstrates:
 
 ---
 
-## 👤 Author
+## 👤 Dev
 
 **Vaibhav Umbarkar**
 
