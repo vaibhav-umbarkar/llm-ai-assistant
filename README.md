@@ -888,7 +888,7 @@ Add the diagrams to the README using:
 
 ------------------------------------------------------------------------
 
-## 👤 Developer
+## 👤 Dev
 
 **Vaibhav Umbarkar**
 
