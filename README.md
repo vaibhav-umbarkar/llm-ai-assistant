@@ -1,4 +1,4 @@
-# 🤖 LLM AI Assistant --- Kubernetes & AWS Deployment
+# 🤖 LLM AI Assistant - Kubernetes & AWS Deployment
 
 A containerized LLM-based AI assistant deployed on a Kubernetes cluster
 using **kind (Kubernetes in Docker)** and hosted on an **AWS EC2
