@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-service
+  namespace: chat
+  labels:
+    app: chat-service
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: chat-service
+
+  template:
+    metadata:
+      labels:
+        app: chat-service
+
+    spec:
+      containers:
+        - name: chat-service
+          image: llm_project-chat-service:latest
+          imagePullPolicy: IfNotPresent
+
+          ports:
+            - containerPort: 3080
+              protocol: TCP
+
+          env:
+            - name: CHATS_PORT
+              value: "3080"
+
+            - name: CHATS_DIR
+              value: "/app/chats"
+
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
+
+          readinessProbe:
+            tcpSocket:
+              port: 3080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+
+          livenessProbe:
+            tcpSocket:
+              port: 3080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
+          volumeMounts:
+            - name: chats-storage
+              mountPath: /app/chats
+
+      volumes:
+        - name: chats-storage
+          persistentVolumeClaim:
+            claimName: chat-storage
