@@ -892,5 +892,5 @@ Add the diagrams to the README using:
 
 **Vaibhav Umbarkar**
 
-DevOps Engineer \| AWS \| Kubernetes \| Docker \| Terraform \| Jenkins
+DevOps \| AWS \| Kubernetes \| Docker \| Terraform \| Jenkins
 \| CI/CD
