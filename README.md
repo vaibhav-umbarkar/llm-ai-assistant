@@ -75,48 +75,7 @@ The Kubernetes cluster runs on an EC2 instance inside a private subnet.
 The application workloads run inside a kind Kubernetes cluster hosted on
 Docker.
 
-``` text
-                         INTERNET
-                            │
-                            │ HTTP / HTTPS
-                            ▼
-                  ┌─────────────────────┐
-                  │   Ingress / NGINX   │
-                  │  Ingress Controller │
-                  └──────────┬──────────┘
-                             │
-                             ▼
-                  ┌─────────────────────┐
-                  │     API Gateway     │
-                  │                     │
-                  │     Deployment      │
-                  │     replicas: 2     │
-                  └──────────┬──────────┘
-                             │
-                             ▼
-                  ┌─────────────────────┐
-                  │    Chat Service     │
-                  │                     │
-                  │     Deployment      │
-                  │     replicas: 2     │
-                  └──────────┬──────────┘
-                             │
-                             ▼
-                  ┌─────────────────────┐
-                  │       Ollama        │
-                  │                     │
-                  │     StatefulSet     │
-                  │     replicas: 1     │
-                  │                     │
-                  │     qwen2.5:7b      │
-                  └──────────┬──────────┘
-                             │
-                             ▼
-                  ┌─────────────────────┐
-                  │ Persistent Volume   │
-                  │   Ollama Model Data │
-                  └─────────────────────┘
-```
+![LLM AI Assistant App Arch](app_arch.png)
 
 ------------------------------------------------------------------------
 
